@@ -1,11 +1,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from '../src/components/header'
+import Header from '../src/components/header';
+import Footer from './components/footer';
+import Routes from './router';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Header />
+      <Routes />
+      <Footer/>
     </div>
   );
 }
