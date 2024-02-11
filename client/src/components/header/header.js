@@ -36,7 +36,7 @@ const Header = () => {
                     </Nav>
                 </Navbar.Collapse>
                 <Nav className="d-none d-lg-flex">
-                    <Button variant="outline-primary" href="tel:+12048698505">204-869-8505</Button>
+                    <Button variant="outline-info" href="tel:+12048698505">204-869-8505</Button>
                 </Nav>
             </Container>
         </Navbar>
