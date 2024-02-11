@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
-import Home from './container/home';
-import About from './container/about';
-import Services from './container/services';
-import Gallery from './container/gallery';
-import Contact from './container/contact';
+import Home from './components/home/home';
+import About from './components/about/about';
+import Services from './components/services/services';
+import Gallery from './components/gallery/gallery';
+import Contact from './components/contact/contact';
 
 function AppRoutes() {
     return (
