@@ -1,13 +1,12 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import Logo from '../../assets/logo.svg';
-
 
 const Header = () => {
     const location = useLocation();
-    const [currentNav, setCurrentNav] = useState('');
 
-    const navItems = useMemo(()=>[
+    const navItems = useMemo(() => [
         { name: 'HOME', href: '/', path: '/' },
         { name: 'ABOUT', href: '/about-us', path: '/about-us' },
         { name: 'SERVICES', href: '/services', path: '/services' },
@@ -15,46 +14,33 @@ const Header = () => {
         { name: 'CONTACT US', href: '/contact', path: '/contact' },
     ], []);
 
-    useEffect(() => {
-        const currentItem = navItems.find(item => item.path === location.pathname);
-        if (currentItem) {
-            setCurrentNav(currentItem.name);
-        }
-        else {
-            setCurrentNav('HOME');
-        }
-
-    }, [location, navItems]);
+    const isActive = (path) => location.pathname === path;
 
     return (
-        <div className='container'>
-            <nav className="navbar navbar-expand-lg bg-transparent">
-                <div className="container-fluid">
-                    <Link className="navbar-brand" to='/'>
-                        <img src={Logo} alt="Proficient Constructions" width="100" height="auto" />
-                    </Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            {navItems.map((item) => (
-                                <li className="nav-item" key={item.name}>
-                                    <Link
-                                        className={`nav-link ${currentNav === item.name ? 'active' : ''}`}
-                                        to={item.href}
-                                        onClick={() => setCurrentNav(item.name)}
-                                        aria-current={currentNav === item.name ? 'page' : undefined}
-                                    >
-                                        {item.name}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <Navbar bg="transparent" expand="lg" className="container">
+            <Container>
+                <Navbar.Brand as={Link} to="/">
+                    <img src={Logo} alt="Proficient Constructions" width="100" height="auto" />
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        {navItems.map((item) => (
+                            <Nav.Link as={Link} to={item.href} key={item.name} className={isActive(item.path) ? 'active' : ''}>
+                                {item.name}
+                            </Nav.Link>
+                        ))}
+                    </Nav>
+                    <Nav>
+                        <Nav.Link href="tel:+12048698505" className="d-lg-none">204-869-8505</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+                <Nav className="d-none d-lg-flex">
+                    <Button variant="outline-primary" href="tel:+12048698505">204-869-8505</Button>
+                </Nav>
+            </Container>
+        </Navbar>
     );
-}
+};
+
 export default Header;
